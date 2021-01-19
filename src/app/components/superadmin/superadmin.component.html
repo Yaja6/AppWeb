@@ -1,0 +1,28 @@
+<body>
+    <div class="container">
+        <div class="row">
+          <div class="col">
+          </div>
+          <div class="col" style="background-color:rgb(159, 231, 207);">
+            <h1 class="display-4">¡Bienvenido!</h1>
+            <h3>Registra un usuario administrador</h3>
+            <form>
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Correo electrónico</label>
+                  <input type="email" [(ngModel)]="user.email" class="form-control" name="email" >
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                  <input type="password" [(ngModel)]="user.password" class="form-control" name="password" >
+                </div>
+                <button (click)="onRegister()" class="btn btn-dark">Registrar</button>
+            </form>
+            <button (click)="logout()" class="btn btn-dark">Salir</button>
+
+          </div>
+        </div>
+        <div *ngIf="registrado" class="alert alert-success" role="alert">
+            Usuario registrado
+        </div>
+    </div>
+</body>

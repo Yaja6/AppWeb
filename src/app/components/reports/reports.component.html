@@ -1,0 +1,35 @@
+<app-menu></app-menu>
+<h2>Lista de reportes:</h2>
+<body>
+    <div class="container">
+        <div class="row" *ngFor='let publication of publications'>
+          <div class="col">
+            Datos del Reporte:
+            <ul class="list-group">
+                <li class="list-group-item">ID de usuario:<br>{{publication.idUserReported}}</li>
+                <li class="list-group-item">Motivo de reporte:<br>{{publication.reasonReport}}</li>
+                <li class="list-group-item">Comentario:<br>{{publication.commentReport}}</li>
+                <li class="list-group-item">Estado:<br>{{publication.state}}</li>
+                <li class="list-group-item">ID de reporte:<br>{{publication.idReport}}</li>
+            </ul>
+          </div>
+          <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                  <h6 class="card-title">{{publication.title | uppercase}}</h6>
+                  <h6 class="price">{{publication.userName}}</h6>
+                  <p class="card-text">{{publication.description}}</p>
+                  <a [href]="publication.file">{{publication.file}}</a>
+                </div>
+            </div>
+          </div>
+          <div class="col">
+            <button  type="button" class="btn btn-danger" (click)="deletePublication(publication)" >
+                Borrar
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Button trigger modal -->
+</body>
+    

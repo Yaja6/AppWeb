@@ -1,0 +1,18 @@
+<app-menu></app-menu>
+<h2 >Publicaciones hasta la fecha:</h2>
+<div class="row"> 
+    <!-- Prods -->
+      <div *ngFor='let publication of publications' class="col-6 col-md-4" style="width: 18rem;">
+        <div class="card">
+          <a [href]="publication.file">{{publication.file}}</a>
+          <div class="card-body">
+            <h6 class="card-title">{{publication.title | uppercase}}</h6>
+            <h6 class="price">{{publication.userName}}</h6>
+            <p class="card-text">{{publication.description}}</p>
+          </div>
+          <button  type="button" class="btn btn-danger" >
+              Borrar
+          </button>
+        </div>
+     </div>
+</div>
