@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
-import { AdminComponent } from './components/admin/admin.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { UsersComponent } from './components/users/users.component';
 import { PublicationsComponent } from './components/publications/publications.component';
@@ -26,7 +25,6 @@ import { SuperadminComponent } from './components/superadmin/superadmin.componen
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    AdminComponent,
     ReportsComponent,
     UsersComponent,
     PublicationsComponent,

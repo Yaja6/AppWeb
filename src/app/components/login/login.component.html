@@ -7,3 +7,9 @@
       </form>
     </div>
 </div>
+<div *ngIf="error" class="alert alert-danger" role="alert">
+  {{errorMessage}}
+</div>
+<div *ngIf="success" class="alert alert-success" role="alert">
+  {{errorMessage}}
+</div>

@@ -1,6 +1,9 @@
 <app-menu></app-menu>
 <h2>Lista de reportes:</h2>
 <body>
+  <div *ngIf="!reports" class="alert alert-danger" role="alert">
+    {{message}}
+  </div>
     <div class="container">
         <div class="row" *ngFor='let publication of publications'>
           <div class="col">
@@ -15,6 +18,7 @@
           </div>
           <div class="col-6">
             <div class="card">
+                <img *ngIf="publication.image" [src]="publication.image" class="card-img-top" style="height: 300px;">
                 <div class="card-body">
                   <h6 class="card-title">{{publication.title | uppercase}}</h6>
                   <h6 class="price">{{publication.userName}}</h6>

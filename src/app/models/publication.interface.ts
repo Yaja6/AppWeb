@@ -13,7 +13,7 @@ export interface PublicationInterface {
     userPhoto?: string;
     idSaved?: string;
     idUserSave?: string;
-    idReport?: string;
+    idReport?: any;
     idUserReported?: string;
     commentReport?: string;
     reasonReport?: string;

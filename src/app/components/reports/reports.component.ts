@@ -13,6 +13,8 @@ export class ReportsComponent implements OnInit {
   solucionado = false;
   currentUser = 'Admin';
   estado = false;
+  message = '';
+  reports = true;
   publications: PublicationInterface[] = [];
   publicationReported: PublicationInterface = {
     id: '',
@@ -37,8 +39,14 @@ export class ReportsComponent implements OnInit {
   }
   getPublications(){
     this.firestoreService.getCollection<PublicationInterface>(this.path).subscribe( res => {  // res - respuesta del observador
-    this.publications = res;
-    console.log('guaradados', res);
+    if(res){
+      this.publications = res;
+    }
+    if(res.length === 0){
+      this.reports = false;
+      this.message = 'No existen publicaciones reportadas';
+    }
+    console.log('reportados', res);
    });
   }
   deletePublication(publi: PublicationInterface){

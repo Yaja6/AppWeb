@@ -1,6 +1,6 @@
 export interface UserInterface{
-    uid: string;
+    uid: any;
     email: string;
     password: string;
-    rol?: string;
+    rol: string;
 }

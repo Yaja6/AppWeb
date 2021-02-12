@@ -38,4 +38,8 @@ export class PublicationsComponent implements OnInit {
     console.log('publi', res);
    });
   }
+  deletePublication(idea: PublicationInterface){
+    this.firestoreService.deleteDoc(this.path, idea.id);
+    console.log('Borrado');
+  }
 }

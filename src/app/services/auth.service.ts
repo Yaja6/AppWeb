@@ -1,3 +1,5 @@
+import { UserInterface } from './../models/user.interface';
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 
@@ -6,15 +8,25 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class AuthService {
 
-  constructor(public fireAuth: AngularFireAuth) { }
+  m ='';
+  e = false;
+  public userData$: Observable<firebase.User>;
+
+  constructor(public fireAuth: AngularFireAuth) { 
+    this.userData$ = fireAuth.authState;
+  }
 
   async loginUser(email: string, password: string){
     try{
       const {user} = await this.fireAuth.signInWithEmailAndPassword(email, password);
-      // this.updateUserData(user);
-      return user;
+      if(user){
+        return user;
+      }
+      
     }catch (error){
-      console.log(error);
+      this.e = true;
+      this.m = error.message;
+      console.log(' error', this.m);
     }
   }
   async register(email: string, password: string){
@@ -38,4 +50,5 @@ export class AuthService {
       return uidUser.uid;
     }
   }
+ 
 }

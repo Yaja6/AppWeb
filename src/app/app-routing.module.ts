@@ -1,4 +1,3 @@
-import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, CanActivate } from '@angular/router';
@@ -7,6 +6,7 @@ import { ReportsComponent } from './components/reports/reports.component';
 import { LoginComponent } from './components/login/login.component';
 import { UsersComponent } from './components/users/users.component';
 import { SuperadminComponent } from './components/superadmin/superadmin.component';
+import { AuthguardGuard } from './guards/authguard.guard';
 
 const routes: Routes = [
   {
@@ -20,22 +20,28 @@ const routes: Routes = [
   {
     path: 'home', 
     component: HomeComponent,
+    canActivate: [AuthguardGuard],
+    
   },
   {
     path: 'publications', 
-    component: PublicationsComponent
+    component: PublicationsComponent,
+    canActivate: [AuthguardGuard],
   },
   {
     path: 'reports', 
-    component: ReportsComponent
+    component: ReportsComponent,
+    canActivate: [AuthguardGuard],
   },
   {
     path: 'users', 
-    component: UsersComponent
+    component: UsersComponent,
+    canActivate: [AuthguardGuard],
   },
   {
     path: 'superadmin', 
-    component: SuperadminComponent
+    component: SuperadminComponent,
+    canActivate: [AuthguardGuard],
   },
 ];
 

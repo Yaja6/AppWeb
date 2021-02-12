@@ -12,14 +12,14 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 })
 export class SuperadminComponent implements OnInit {
 
-  registrado = false;
   user: UserInterface = {
     uid: '',
     email: '',
     password: '',
     rol: '',
   };
-
+  private path = 'Admins/';
+  admins: UserInterface[] = [];
   constructor(
     public firestoreService: FirestoreService,
     public authSvc: AuthService,
@@ -38,6 +38,7 @@ export class SuperadminComponent implements OnInit {
      }
 
   ngOnInit(): void {
+    this.getAdmins();
   }
   async onRegister(){
     const credentials = {
@@ -56,7 +57,6 @@ export class SuperadminComponent implements OnInit {
     const path = 'Admins/';
     this.user.rol= 'admin';
     this.firestoreService.createDoc(this.user, path, this.user.uid).then(res => {
-      this.registrado = true;
     }).catch (err => {
       console.log(err);
     });
@@ -74,4 +74,9 @@ export class SuperadminComponent implements OnInit {
     this.router.navigate(['login']);
   }
 
+  getAdmins(){
+    this.firestoreService.getCollection<UserInterface>(this.path).subscribe( res => {  // res - respuesta del observador
+    this.admins = res;
+    });
+  }
 }
