@@ -15,6 +15,7 @@ export class SuperadminComponent implements OnInit {
   user: UserInterface = {
     uid: '',
     email: '',
+    name: '',
     password: '',
     rol: '',
   };
@@ -65,6 +66,7 @@ export class SuperadminComponent implements OnInit {
     this.user = {
       uid: '',
       email: '',
+      name: '',
       password: '',
       rol: '',
     };

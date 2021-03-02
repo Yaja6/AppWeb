@@ -9,7 +9,7 @@
             <p class="card-text">{{publication.description}}</p>
           </div>
           <a href="{{publication.file}}" target="_blank">{{publication.fileName}}</a>
-            <carousel *ngIf="publication.image.length != 0">
+            <carousel *ngIf="publication.image != null">
               <div class="carousel-cell" *ngFor="let image of publication.image">
                   <img [src]="image">
               </div>
