@@ -10,19 +10,18 @@ export class AuthService {
 
   m ='';
   e = false;
-  public userData$: Observable<firebase.User>;
+  public userData$: Observable<any>;
 
   constructor(public fireAuth: AngularFireAuth) { 
     this.userData$ = fireAuth.authState;
   }
 
-  async loginUser(email: string, password: string){
+  async loginUser(email: string, password: string): Promise<any>{
     try{
       const {user} = await this.fireAuth.signInWithEmailAndPassword(email, password);
       if(user){
         return user;
-      }
-      
+      }   
     }catch (error){
       this.e = true;
       this.m = error.message;

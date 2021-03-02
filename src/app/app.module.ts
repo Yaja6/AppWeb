@@ -18,6 +18,7 @@ import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { MenuComponent } from './components/menu/menu.component';
 import { SuperadminComponent } from './components/superadmin/superadmin.component';
+import { IvyCarouselModule } from 'angular-responsive-carousel';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { SuperadminComponent } from './components/superadmin/superadmin.componen
   imports: [
     BrowserModule,
     FormsModule,
+    IvyCarouselModule,
     AppRoutingModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
