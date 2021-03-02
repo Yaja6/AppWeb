@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
     uid: '',
     email: '',
     password: '',
+    name: '',
     rol: '',
   };
   errorMessage = '';
@@ -67,6 +68,7 @@ export class LoginComponent implements OnInit {
     this.user = {
       uid: '',
       email: '',
+      name: '',
       password: '',
       rol: '',
     };

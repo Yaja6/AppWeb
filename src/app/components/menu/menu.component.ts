@@ -13,6 +13,7 @@ export class MenuComponent implements OnInit {
   user: UserInterface = {
     uid: '',
     email: '',
+    name: '',
     password: '',
     rol: '',
   };
@@ -44,6 +45,7 @@ export class MenuComponent implements OnInit {
   initUser(){
     this.user = {
       uid: '',
+      name: '',
       email: '',
       password: '',
       rol: '',

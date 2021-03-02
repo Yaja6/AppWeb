@@ -22,6 +22,7 @@ export class PublicationsComponent implements OnInit {
     userId: '',
     idSaved: '',
     idUserSave: '',
+    
   };
   publications: PublicationInterface[]=[];
   constructor(
