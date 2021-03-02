@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PublicationInterface } from 'src/app/models/publication.interface';
 import { FirestoreService } from 'src/app/services/firestore.service';
-
+import {IvyCarouselModule} from 'angular-responsive-carousel';
 @Component({
   selector: 'app-publications',
   templateUrl: './publications.component.html',

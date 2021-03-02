@@ -1,7 +1,6 @@
 <app-menu></app-menu>
 <h2 >Publicaciones hasta la fecha:</h2>
 <div class="row"> 
-    <!-- Prods -->
       <div *ngFor='let publication of publications' class="col-6 col-md-4" style="width: 18rem;">
         <div class="card" style="margin-top: 10px;">
           <div class="card-body">
@@ -9,22 +8,12 @@
             <h6 class="price">{{publication.userName}}</h6>
             <p class="card-text">{{publication.description}}</p>
           </div>
-          <div  *ngFor="let image of publication.image" id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img [src]="image" class="d-block w-100" alt="..."  style="height: 300px;">
+          <a href="{{publication.file}}" target="_blank">{{publication.fileName}}</a>
+            <carousel *ngIf="publication.image.length != 0">
+              <div class="carousel-cell" *ngFor="let image of publication.image">
+                  <img [src]="image">
               </div>
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </a>
-          </div>
-          <a [href]="publication.file">{{publication.file}}</a>
+          </carousel>  
           <button (click)="deletePublication(publication)" type="button" class="btn btn-danger" >
               Borrar
           </button>
