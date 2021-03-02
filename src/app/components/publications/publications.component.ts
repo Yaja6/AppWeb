@@ -31,6 +31,9 @@ export class PublicationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPublications();
+    const tag = document.createElement('script');
+    tag.src = '//www.youtube.com/iframe_api';
+    document.body.appendChild(tag);
   }
 
   getPublications(){

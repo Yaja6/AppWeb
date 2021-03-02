@@ -132,5 +132,8 @@
       }
     }
   },
-  "defaultProject": "AdminWeb"
+  "defaultProject": "AdminWeb",
+  "cli": {
+    "analytics": false
+  }
 }

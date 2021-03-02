@@ -6,14 +6,22 @@
           <div class="card-body">
             <h6 class="card-title">{{publication.title | uppercase}}</h6>
             <h6 class="price">{{publication.userName}}</h6>
-            <p class="card-text">{{publication.description}}</p>
+            <p class="card-text">{{publication.description}}</p>  
           </div>
           <a href="{{publication.file}}" target="_blank">{{publication.fileName}}</a>
             <carousel *ngIf="publication.image != null">
               <div class="carousel-cell" *ngFor="let image of publication.image">
                   <img [src]="image">
               </div>
-          </carousel>  
+          </carousel>
+          <youtube-player 
+          [videoId]="publication.videoURL" 
+          suggestedQuality="highres"
+          [height]="250" 
+          [width]="348" 
+          [startSeconds]="1"
+          > 
+          </youtube-player>
           <button (click)="deletePublication(publication)" type="button" class="btn btn-danger" >
               Borrar
           </button>
