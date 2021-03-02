@@ -19,5 +19,5 @@ export interface PublicationInterface {
     reasonReport?: string;
     userResolve?: string;
     state?: string;
-
+    videoURL?:any;
 }

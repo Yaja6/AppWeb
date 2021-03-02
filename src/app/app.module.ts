@@ -19,7 +19,7 @@ import { FormsModule } from '@angular/forms';
 import { MenuComponent } from './components/menu/menu.component';
 import { SuperadminComponent } from './components/superadmin/superadmin.component';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
-
+import { YouTubePlayerModule  }  from  '@angular/youtube-player';
 
 @NgModule({
   declarations: [
@@ -42,6 +42,7 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.credencialesFirebase),
+    YouTubePlayerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
