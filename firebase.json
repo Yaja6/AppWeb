@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "site": "admin-r-utiliza",
+    "public": "dist/AdminWeb",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

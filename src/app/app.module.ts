@@ -20,6 +20,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { SuperadminComponent } from './components/superadmin/superadmin.component';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { YouTubePlayerModule  }  from  '@angular/youtube-player';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { YouTubePlayerModule  }  from  '@angular/youtube-player';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.credencialesFirebase),
-    YouTubePlayerModule
+    YouTubePlayerModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]
