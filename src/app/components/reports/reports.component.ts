@@ -60,14 +60,18 @@ export class ReportsComponent implements OnInit {
     const path = 'Reports/';
     publi.userResolve = this.currentUser;
     if (this.estado === true ){
-      publi.state = 'Solucionado';
+      this.publications.forEach(e => {
+        if(publi.id == e.id){
+          e.state = 'Solucionado'
+          this.firestoreService.updateDoc(e, path, e.idReport).then(res => {
+            console.log('Reporte solucionado');
+          }).catch (err => {
+              console.log(err);
+          });
+        }
+      });
     }else{
       publi.state = 'Sin solucionar';
-    }
-    this.firestoreService.updateDoc(publi, path, publi.idReport).then(res => {
-        console.log('Reporte enviado, gracias por ayudarnos :)');
-      }).catch (err => {
-          console.log(err);
-      });
+    } 
   }
 }

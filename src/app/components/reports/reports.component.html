@@ -18,24 +18,26 @@
           </div>
           <div class="col-6">
             <div class="card">
-                <div class="card-body">
+              <carousel *ngIf="publication.image == undefined ">
+                <div class="carousel-cell" *ngFor="let image of publication.image">
+                    <img [src]="image">
+                </div>
+              </carousel>
+              <youtube-player 
+              [videoId]="publication.videoURL" 
+              suggestedQuality="highres"
+              [height]="250" 
+              [width]="348" 
+              [startSeconds]="1"
+              > 
+              </youtube-player>                
+            <div class="card-body">
                   <h6 class="card-title">{{publication.title | uppercase}}</h6>
                   <h6 class="price">{{publication.userName}}</h6>
                   <p class="card-text">{{publication.description}}</p>
-                  <a [href]="publication.file">{{publication.file}}</a>
-                  <img *ngIf="publication.image" [src]="publication.image" class="card-img-top" style="height: 300px;">
-                  <youtube-player 
-                  [videoId]="publication.videoURL" 
-                  suggestedQuality="highres"
-                  [height]="350" 
-                  [width]="480" 
-                  [startSeconds]="1"
-                  > 
-                  </youtube-player>
+                  <a href="{{publication.file}}" target="_blank">{{publication.fileName}}</a>
                 </div>
-                
             </div>
-            
           </div>
           <div class="col">
             <button  type="button" class="btn btn-danger" (click)="deletePublication(publication)" >

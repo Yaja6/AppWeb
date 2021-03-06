@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "r-utiliza"
+  },
+  "targets": {
+    "r-utiliza": {
+      "hosting": {
+        "AdminWeb": [
+          "r-utiliza"
+        ]
+      }
+    }
   }
 }
