@@ -21,7 +21,7 @@ import { SuperadminComponent } from './components/superadmin/superadmin.componen
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { YouTubePlayerModule  }  from  '@angular/youtube-player';
 import { ServiceWorkerModule } from '@angular/service-worker';
-
+import {MaterialModule} from './material/material.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +32,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     PublicationsComponent,
     LoginComponent,
     MenuComponent,
-    SuperadminComponent
+    SuperadminComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +44,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.credencialesFirebase),
     YouTubePlayerModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

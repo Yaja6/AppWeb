@@ -1,42 +1,49 @@
 <app-menu></app-menu>
-<h2>Lista de reportes:</h2>
+<br><br><h2>Lista de reportes:</h2><br>
 <body>
   <div *ngIf="!reports" class="alert alert-danger" role="alert">
     {{message}}
   </div>
     <div class="container">
         <div class="row" *ngFor='let publication of publications'>
+          <br><br>
           <div class="col">
-            Datos del Reporte:
-            <ul class="list-group">
-                <li class="list-group-item">ID de usuario:<br>{{publication.idUserReported}}</li>
-                <li class="list-group-item">Motivo de reporte:<br>{{publication.reasonReport}}</li>
-                <li class="list-group-item">Comentario:<br>{{publication.commentReport}}</li>
-                <li class="list-group-item">Estado:<br>{{publication.state}}</li>
-                <li class="list-group-item">ID de reporte:<br>{{publication.idReport}}</li>
+            <mat-toolbar class="mat-toolbar-publication">
+            <mat-toolbar-row>
+              <span><b class="color-text">Datos del Reporte:</b></span>
+            </mat-toolbar-row>
+          </mat-toolbar>
+            <ul class="list-group ">
+                <li class="list-group-item"><mat-icon>fingerprint</mat-icon><b>  ID de reporte:</b><br>{{publication.idReport}}</li>
+                <li class="list-group-item"><mat-icon>description</mat-icon><b>  Motivo de reporte:</b><br>{{publication.reasonReport}}</li>
+                <li class="list-group-item"><mat-icon> forum</mat-icon><b>  Comentario:</b><br>{{publication.commentReport}}</li>
+                <li class="list-group-item"><mat-icon>timelapse</mat-icon><b>  Estado:</b><br><p *ngIf="publication.state == 'Solucionado'">&nbsp;&nbsp;&nbsp;&nbsp;{{publication.state}}<mat-icon>check_circle</mat-icon></p><p *ngIf="publication.state == 'Sin solucionar'">&nbsp;&nbsp;&nbsp;&nbsp;{{publication.state}}<mat-icon>cancel</mat-icon></p></li>
             </ul>
           </div>
+         
           <div class="col-6">
-            <div class="card">
-              <carousel *ngIf="publication.image == undefined ">
-                <div class="carousel-cell" *ngFor="let image of publication.image">
-                    <img [src]="image">
-                </div>
-              </carousel>
-              <youtube-player 
-              [videoId]="publication.videoURL" 
-              suggestedQuality="highres"
-              [height]="250" 
-              [width]="348" 
-              [startSeconds]="1"
-              > 
-              </youtube-player>                
-            <div class="card-body">
-                  <h6 class="card-title">{{publication.title | uppercase}}</h6>
-                  <h6 class="price">{{publication.userName}}</h6>
-                  <p class="card-text">{{publication.description}}</p>
-                  <a href="{{publication.file}}" target="_blank">{{publication.fileName}}</a>
-                </div>
+            <div>
+              <mat-card class="mat-card-publication">
+                <carousel *ngIf="publication.image == undefined ">
+                  <div class="carousel-cell" *ngFor="let image of publication.image">
+                      <img [src]="image">
+                  </div>
+                </carousel>
+                <youtube-player 
+                [videoId]="publication.videoURL" 
+                suggestedQuality="highres"
+                [height]="250" 
+                [width]="348" 
+                [startSeconds]="1"
+                > 
+                </youtube-player>                
+              <div class="card-body">
+                    <h6 class="card-title"><b>Título:</b> {{publication.title | uppercase}}</h6>
+                    <h6 class="price"><b>Usuario: </b> {{publication.userName}}</h6>
+                    <p class="card-text"><b>Descripción:</b><br> {{publication.description}}</p>
+                    <a href="{{publication.file}}" target="_blank">{{publication.fileName}}</a>
+                  </div>
+               </mat-card>
             </div>
           </div>
           <div class="col">
@@ -44,7 +51,9 @@
                 Borrar
             </button>
           </div>
+        
         </div>
+      
       </div>
       <!-- Button trigger modal -->
 </body>

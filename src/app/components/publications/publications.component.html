@@ -1,14 +1,15 @@
 <app-menu></app-menu>
-<h2 >Publicaciones hasta la fecha:</h2>
+<br><br><h2>Publicaciones hasta la fecha:</h2><br><br>
 <div class="row"> 
       <div *ngFor='let publication of publications' class="col-6 col-md-4" style="width: 18rem;">
-        <div class="card" style="margin-top: 10px;">
-          <div class="card-body">
+        <div class="card" style="margin-top: 10px; background-color: lightgray;">
+          <div class="card-body ">
             <h6 class="card-title">{{publication.title | uppercase}}</h6>
             <h6 class="price">{{publication.userName}}</h6>
             <p class="card-text">{{publication.description}}</p>  
+            <a href="{{publication.file}}" target="_blank">{{publication.fileName}}</a>
           </div>
-          <a href="{{publication.file}}" target="_blank">{{publication.fileName}}</a>
+          
             <carousel *ngIf="publication.image != undefined">
               <div class="carousel-cell" *ngFor="let image of publication.image">
                   <img [src]="image">
@@ -22,9 +23,12 @@
           [startSeconds]="1"
           > 
           </youtube-player>
+          <div class="card-body " style="text-align: end;"><span>
           <button (click)="deletePublication(publication)" type="button" class="btn btn-danger" >
-              Borrar
+           <mat-icon>delete_sweep</mat-icon> Borrar
           </button>
+        </span>
+        </div>
         </div>
      </div>
 </div>
