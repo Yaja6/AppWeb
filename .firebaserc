@@ -6,7 +6,7 @@
     "r-utiliza": {
       "hosting": {
         "AdminWeb": [
-          "r-utiliza"
+          "admin-r-utiliza"
         ]
       }
     }
