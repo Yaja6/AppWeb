@@ -50,11 +50,31 @@ Los administradores podrán ver la lista de todos los usuarios registrados en la
 ## 4. Versiones de Desarrollo
 <img src="https://github.com/Yaja6/AppWeb/blob/master/Captures/version.jpg" width="500"/>
 
-## 5. Anexos
+## 5. Instalación
+
+###  1. Clonar el Repositorio
+```bash
+git clone https://github.com/Yaja6/AppWeb.git
+cd AppWeb
+```
+
+###  2. Instalar dependencias
+
+```bash
+npm install
+```
+
+###  3. Levatar el servidor local
+
+```bash
+ng serve
+```
+
+
+## 6. Anexos
 <br/><b>Informe Técnico:</b>
 <br/><b>Manual Técnico:</b> 
 <br/><b>Manual de Instalación:</b> 
-
 
 
 
