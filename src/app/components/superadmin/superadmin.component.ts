@@ -19,6 +19,7 @@ export class SuperadminComponent implements OnInit {
     password: '',
     rol: '',
   };
+  errorMessage = '';
   private path = 'Admins/';
   admins: UserInterface[] = [];
   constructor(
@@ -42,26 +43,26 @@ export class SuperadminComponent implements OnInit {
     this.getAdmins();
   }
   async onRegister(){
-    const credentials = {
-      email: this.user.email,
-      password: this.user.password
-    };
-    const res = await this.authSvc.register(credentials.email, credentials.password).catch(err => {
-    });
-    const id = await this.authSvc.getUid();
-    this.user.uid = id;
-    console.log(id);
+    await this.authSvc.register(this.user.email, this.user.password);
     this.saveUser();
     this.initUser();
   }
   async saveUser() { // registrar usuario en la base de datos con id de auth
-    const path = 'Admins/';
     this.user.rol= 'admin';
-    this.firestoreService.createDoc(this.user, path, this.user.uid).then(res => {
-    }).catch (err => {
-      console.log(err);
-    });
+    const path = 'Admins/';
+    this.user.uid = this.firestoreService.getId();
+    const admin = this.admins.filter( e => e.email == this.user.email);
+    if(admin.length == 0){
+      this.firestoreService.createDoc(this.user, path, this.user.uid).then(res => {
+        this.errorMessage = '';
+      }).catch (err => {
+        console.log(err);
+      });
+    }else{
+      this.errorMessage = 'Correo electrónico ya existe';
+    }
   }
+
   initUser(){
     this.user = {
       uid: '',

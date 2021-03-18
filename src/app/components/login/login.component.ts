@@ -19,15 +19,23 @@ export class LoginComponent implements OnInit {
     name: '',
     rol: '',
   };
+  idCurrentUser = '';
   errorMessage = '';
   error = false;
   success = false;
-
+  admins: UserInterface[] = [];
   constructor(
     private authSvc: AuthService,
     private router: Router,
     public firestoreService: FirestoreService,
-  ) { }
+  ) { 
+    this.authSvc.stateAuth().subscribe(res => {
+      console.log(res);
+      if (res != null){
+        this.idCurrentUser = res.uid;
+      }
+    });
+  }
 
   ngOnInit(): void {
   }
@@ -38,32 +46,33 @@ export class LoginComponent implements OnInit {
       this.errorMessage = this.authSvc.m;
       this.error = this.authSvc.e;
       if (user){
-        console.log(user.uid);
-        this.getUserInfo(user.uid);
-        this.initUser();
-        this.errorMessage = 'Espere mientras lo redirigimos...';
         this.success = true;
+        this.errorMessage = 'Espere mientras lo redirigimos...';
+        this.getUserInfo(user.email);
+        this.initUser();
       }
     } catch (error){
       console.log(error);
     }
   }
 
-
-  getUserInfo(uid: string){ // trae info de la bd
+  getUserInfo(email: string){ // trae info de la bd
     const path = 'Admins/';
-    this.firestoreService.getDoc<UserInterface>(path, uid).subscribe( res => {
+    this.firestoreService.getCollection<UserInterface>(path).subscribe( res => {  // res - respuesta del observador
+      this.admins = res;
+      const infor = this.admins.filter( e => e.email == email);
+      console.log(infor[0].rol);
       if(res){
-        console.log(res.rol);
-        if(res.rol === 'superadmin'){
+        if(infor[0].rol === 'superadmin'){
           this.router.navigate(['superadmin']);
         }
-        if(res.rol === 'admin'){
+        if(infor[0].rol === 'admin'){
           this.router.navigate(['home']);
         }
-      }      
+      }   
     });
   }
+
   initUser(){
     this.user = {
       uid: '',
