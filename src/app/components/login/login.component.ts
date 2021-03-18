@@ -50,6 +50,9 @@ export class LoginComponent implements OnInit {
         this.errorMessage = 'Espere mientras lo redirigimos...';
         this.getUserInfo(user.email);
         this.initUser();
+      }else{
+        this.error = true;
+        this.errorMessage = 'No existe el usuario';
       }
     } catch (error){
       console.log(error);
