@@ -2,13 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { PublicationInterface } from 'src/app/models/publication.interface';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 @Component({
   selector: 'app-publications',
   templateUrl: './publications.component.html',
   styleUrls: ['./publications.component.scss']
 })
 export class PublicationsComponent implements OnInit {
-
+  idsarray:any[]=[];
+  safeUrl: any;
+  idcomp:any;
   userEmail = '';
   idCurrentUser = '';
   private path = 'Ideas/';
@@ -27,6 +30,7 @@ export class PublicationsComponent implements OnInit {
   publications: PublicationInterface[]=[];
   constructor(
     public firestoreService: FirestoreService,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
@@ -34,6 +38,7 @@ export class PublicationsComponent implements OnInit {
     const tag = document.createElement('script');
     tag.src = '//www.youtube.com/iframe_api';
     document.body.appendChild(tag);
+    this.idsarray = [];
   }
 
   getPublications(){
@@ -45,5 +50,23 @@ export class PublicationsComponent implements OnInit {
   deletePublication(idea: PublicationInterface){
     this.firestoreService.deleteDoc(this.path, idea.id);
     console.log('Borrado');
+  }
+
+  getSafeUrl(url:any, id:any){
+    this.idcomp = id;
+    this.idsarray.push(id);
+    if(this.idsarray.includes(id)){
+
+    }
+
+    this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url); 
+    var form = document.createElement('iframe');
+      form.width="100%";
+      form.height="370px";
+      //form.id=id;
+      form.setAttribute("src", url);
+      form.setAttribute("id",id);
+      //document.getElementById(this.idcomp).appendChild(form);
+      document.getElementById(this.idcomp)?.appendChild(form);
   }
 }

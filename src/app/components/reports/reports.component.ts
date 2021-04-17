@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { PublicationInterface } from 'src/app/models/publication.interface';
 import { FirestoreService } from 'src/app/services/firestore.service';
-
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 @Component({
   selector: 'app-reports',
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.scss']
 })
 export class ReportsComponent implements OnInit {
-
+  idsarray:any[]=[];
+  safeUrl: any;
+  idcomp:any;
   private path = 'Reports/';
   solucionado = false;
   currentUser = 'Admin';
@@ -32,10 +34,12 @@ export class ReportsComponent implements OnInit {
   };
   constructor(
     public firestoreService: FirestoreService,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
     this.getPublications();
+    this.idsarray = [];
   }
   getPublications(){
     this.firestoreService.getCollection<PublicationInterface>(this.path).subscribe( res => {  // res - respuesta del observador
@@ -73,5 +77,22 @@ export class ReportsComponent implements OnInit {
     }else{
       publi.state = 'Sin solucionar';
     } 
+  }
+  getSafeUrl(url:any, id:any){
+    this.idcomp = id;
+    this.idsarray.push(id);
+    if(this.idsarray.includes(id)){
+
+    }
+
+    this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url); 
+    var form = document.createElement('iframe');
+      form.width="100%";
+      form.height="370px";
+      //form.id=id;
+      form.setAttribute("src", url);
+      form.setAttribute("id",id);
+      //document.getElementById(this.idcomp).appendChild(form);
+      document.getElementById(this.idcomp)?.appendChild(form);
   }
 }
