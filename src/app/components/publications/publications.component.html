@@ -15,14 +15,14 @@
                   <img [src]="image">
               </div>
           </carousel>
-          <youtube-player 
-          [videoId]="publication.videoURL" 
-          suggestedQuality="highres"
-          [height]="250" 
-          [width]="348" 
-          [startSeconds]="1"
-          > 
-          </youtube-player>
+          <div *ngIf="publication.videoURL != ''" >
+            <div  id="{{publication.id+2}}" class="publication-description">
+                <div size="2" *ngIf="!this.idsarray.includes(publication.id+2)">
+                  <strong>Existe un video. Reprodúcelo</strong>
+                  <mat-icon (click)="getSafeUrl(publication.videoURL, publication.id+2)" name="play-circle-outline" color="success"  >play_circle_filled</mat-icon>
+                </div>
+            </div>
+          </div>
           <div class="card-body " style="text-align: end;"><span>
           <button (click)="deletePublication(publication)" type="button" class="btn btn-danger" >
            <mat-icon>delete_sweep</mat-icon> Borrar
