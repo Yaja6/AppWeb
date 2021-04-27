@@ -1,63 +1,144 @@
 <app-menu></app-menu>
-<br><br><h2>Lista de reportes:</h2><br>
+<br><br><h2>Lista de reportes:</h2>
 <body>
-  <div *ngIf="!reports" class="alert alert-danger" role="alert">
-    {{message}}
-  </div>
+  
     <div class="container">
-      <div class="row" *ngFor='let publication of publications'><br><br>
-          <div class="col">
-            <mat-toolbar class="mat-toolbar-publication">
-            <mat-toolbar-row>
-              <span><b class="color-text">Datos del Reporte:</b></span>
-            </mat-toolbar-row>
-            </mat-toolbar>
-            <ul class="list-group ">
-                <li class="list-group-item" [ngClass]="publication.state == 'Sin solucionar' ? 'withcolor': 'nocolor'">
-                  <mat-icon>fingerprint</mat-icon><b>  ID de reporte:</b><br>{{publication.idReport}}
-                </li>
-                <li class="list-group-item" [ngClass]="publication.state == 'Sin solucionar' ? 'withcolor': 'nocolor'">
-                  <mat-icon>description</mat-icon><b>  Motivo de reporte:</b><br>{{publication.reasonReport}}
-                </li>
-                <li class="list-group-item" [ngClass]="publication.state == 'Sin solucionar' ? 'withcolor': 'nocolor'">
-                  <mat-icon> forum</mat-icon><b>  Comentario:</b><br>{{publication.commentReport}}
-                </li>
-                <li class="list-group-item" [ngClass]="publication.state == 'Sin solucionar' ? 'withcolor': 'nocolor'">
-                  <mat-icon>timelapse</mat-icon><b>  Estado:</b><br><p *ngIf="publication.state == 'Solucionado'">&nbsp;&nbsp;&nbsp;&nbsp;{{publication.state}}<mat-icon>check_circle</mat-icon></p><p *ngIf="publication.state == 'Sin solucionar'">&nbsp;&nbsp;&nbsp;&nbsp;{{publication.state}}<mat-icon>cancel</mat-icon></p>
-                </li>
-            </ul>
+      <mat-tab-group mat-align-tabs="center">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">report</mat-icon>
+            Reportadas
+          </ng-template>
+
+
+          <div *ngIf="!reports" class="alert alert-danger" role="alert">
+            {{message}}
           </div>
-          <div class="col-6">
-            <div>
-              <mat-card class="mat-card-publication">
-                <carousel *ngIf="publication.image == undefined ">
-                  <div class="carousel-cell" *ngFor="let image of publication.image">
-                      <img [src]="image">
-                  </div>
-                </carousel>
-                <div *ngIf="publication.videoURL != ''" >
-                  <div  id="{{publication.id+2}}" class="publication-description">
-                      <div size="2" *ngIf="!this.idsarray.includes(publication.id+2)">
-                        <strong>Existe un video. Reprodúcelo</strong>
-                        <mat-icon (click)="getSafeUrl(publication.videoURL, publication.id+2)" name="play-circle-outline" color="success"  >play_circle_filled</mat-icon>
+          <div  *ngFor='let publication of publications' ><br><br>
+            <div class="row" *ngIf="publication.state == 'Sin solucionar'">
+              <div class="col">
+                <mat-toolbar class="mat-toolbar-publication">
+                <mat-toolbar-row>
+                  <span><b class="color-text">Datos del Reporte:</b></span>
+                </mat-toolbar-row>
+                </mat-toolbar>
+                <ul class="list-group ">
+                    <li class="list-group-item" [ngClass]="publication.state == 'Sin solucionar' ? 'withcolor': 'nocolor'">
+                      <mat-icon>fingerprint</mat-icon><b>  ID de reporte:</b><br>{{publication.idReport}}
+                    </li>
+                    <li class="list-group-item" [ngClass]="publication.state == 'Sin solucionar' ? 'withcolor': 'nocolor'">
+                      <mat-icon>description</mat-icon><b>  Motivo de reporte:</b><br>{{publication.reasonReport}}
+                    </li>
+                    <li class="list-group-item" [ngClass]="publication.state == 'Sin solucionar' ? 'withcolor': 'nocolor'">
+                      <mat-icon> forum</mat-icon><b>  Comentario:</b><br>{{publication.commentReport}}
+                    </li>
+                    <li class="list-group-item" [ngClass]="publication.state == 'Sin solucionar' ? 'withcolor': 'nocolor'">
+                      <mat-icon>timelapse</mat-icon><b>  Estado:</b><br><p *ngIf="publication.state == 'Solucionado'">&nbsp;&nbsp;&nbsp;&nbsp;{{publication.state}}<mat-icon>check_circle</mat-icon></p><p *ngIf="publication.state == 'Sin solucionar'">&nbsp;&nbsp;&nbsp;&nbsp;{{publication.state}}<mat-icon>cancel</mat-icon></p>
+                    </li>
+                </ul>
+              </div>
+              <div class="col-6">
+                <div>
+                  <mat-card class="mat-card-publication">
+                    <div *ngIf="publication.image.length!=0" style="position: relative; z-index:1">
+                      <carousel *ngIf="publication.image != undefined">
+                        <div class="carousel-cell" *ngFor="let image of publication.image"  style="text-align: center; ">
+                            <img [src]="image">
+                        </div>
+                    </carousel>
+                    </div>
+                    <div *ngIf="publication.videoURL != ''" >
+                      <div  id="{{publication.id+2}}" class="publication-description">
+                          <div size="2" *ngIf="!this.idsarray.includes(publication.id+2)">
+                            <strong>Existe un video. Reprodúcelo</strong>
+                            <mat-icon (click)="getSafeUrl(publication.videoURL, publication.id+2)" name="play-circle-outline" color="success"  >play_circle_filled</mat-icon>
+                          </div>
                       </div>
-                  </div>
-                </div>               
-              <div class="card-body">
-                    <h6 class="card-title"><b>Título:</b> {{publication.title | uppercase}}</h6>
-                    <h6 class="price"><b>Usuario: </b> {{publication.userName}}</h6>
-                    <p class="card-text"><b>Descripción:</b><br> {{publication.description}}</p>
-                    <a href="{{publication.file}}" target="_blank">{{publication.fileName}}</a>
-                  </div>
-               </mat-card>
+                    </div>               
+                  <div class="card-body">
+                        <h6 class="card-title"><b>Título:</b> {{publication.title | uppercase}}</h6>
+                        <h6 class="price"><b>Usuario: </b> {{publication.userName}}</h6>
+                        <p class="card-text"><b>Descripción:</b><br> {{publication.description}}</p>
+                        <a href="{{publication.file}}" target="_blank">{{publication.fileName}}</a>
+                      </div>
+                   </mat-card>
+                </div>
+              </div>
+              <div class="col">
+                <button  type="button" class="btn btn-danger" (click)="deletePublication(publication)" >
+                    Solucionar
+                </button>
+              </div>
             </div>
+        </div>
+        </mat-tab>
+      
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">check_circle</mat-icon>
+            Solucionadas
+          </ng-template>
+          <div *ngIf="!reports" class="alert alert-danger" role="alert">
+            {{message}}
           </div>
-          <div class="col">
-            <button  type="button" class="btn btn-danger" (click)="deletePublication(publication)" >
-                Borrar
-            </button>
-          </div>
-      </div>
+          <div  *ngFor='let publication of publications' ><br>
+            <div class="row" *ngIf="publication.state == 'Solucionado'">
+              <div class="col">
+                <mat-toolbar class="mat-toolbar-publication">
+                <mat-toolbar-row>
+                  <span><b class="color-text">Datos del Reporte:</b></span>
+                </mat-toolbar-row>
+                </mat-toolbar>
+                <ul class="list-group ">
+                    <li class="list-group-item" [ngClass]="publication.state == 'Sin solucionar' ? 'withcolor': 'nocolor'">
+                      <mat-icon>fingerprint</mat-icon><b>  ID de reporte:</b><br>{{publication.idReport}}
+                    </li>
+                    <li class="list-group-item" [ngClass]="publication.state == 'Sin solucionar' ? 'withcolor': 'nocolor'">
+                      <mat-icon>description</mat-icon><b>  Motivo de reporte:</b><br>{{publication.reasonReport}}
+                    </li>
+                    <li class="list-group-item" [ngClass]="publication.state == 'Sin solucionar' ? 'withcolor': 'nocolor'">
+                      <mat-icon> forum</mat-icon><b>  Comentario:</b><br>{{publication.commentReport}}
+                    </li>
+                    <li class="list-group-item" [ngClass]="publication.state == 'Sin solucionar' ? 'withcolor': 'nocolor'">
+                      <mat-icon>timelapse</mat-icon><b>  Estado:</b><br><p *ngIf="publication.state == 'Solucionado'">&nbsp;&nbsp;&nbsp;&nbsp;{{publication.state}}<mat-icon>check_circle</mat-icon></p><p *ngIf="publication.state == 'Sin solucionar'">&nbsp;&nbsp;&nbsp;&nbsp;{{publication.state}}<mat-icon>cancel</mat-icon></p>
+                    </li>
+                </ul>
+              </div>
+              <div class="col-6">
+                <div>
+                  <mat-card class="mat-card-publication">
+                    <div *ngIf="publication.image.length!=0" style="position: relative; z-index:1">
+                      <carousel *ngIf="publication.image != undefined">
+                        <div class="carousel-cell" *ngFor="let image of publication.image"  style="text-align: center; ">
+                            <img [src]="image">
+                        </div>
+                    </carousel>
+                    </div>
+                    <div *ngIf="publication.videoURL != ''" >
+                      <div  id="{{publication.id+2}}" class="publication-description">
+                          <div size="2" *ngIf="!this.idsarray.includes(publication.id+2)">
+                            <strong>Existe un video. Reprodúcelo</strong>
+                            <mat-icon (click)="getSafeUrl(publication.videoURL, publication.id+2)" name="play-circle-outline" color="success"  >play_circle_filled</mat-icon>
+                          </div>
+                      </div>
+                    </div>               
+                  <div class="card-body">
+                        <h6 class="card-title"><b>Título:</b> {{publication.title | uppercase}}</h6>
+                        <h6 class="price"><b>Usuario: </b> {{publication.userName}}</h6>
+                        <p class="card-text"><b>Descripción:</b><br> {{publication.description}}</p>
+                        <a href="{{publication.file}}" target="_blank">{{publication.fileName}}</a>
+                      </div>
+                   </mat-card>
+                </div>
+              </div>
+              
+            </div>
+        </div>
+
+        </mat-tab>
+      </mat-tab-group>
+      
+      
     </div>
 </body>
     
