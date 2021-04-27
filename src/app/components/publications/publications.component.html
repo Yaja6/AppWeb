@@ -5,26 +5,28 @@
         <div class="card" style="margin-top: 10px; background-color: lightgray;">
           <div class="card-body ">
             <h6 class="card-title">{{publication.title | uppercase}}</h6>
-            <h6 class="price">{{publication.userName}}</h6>
-            <p class="card-text">{{publication.description}}</p>  
+            <h6 class="price"><b>Usuario: </b>{{publication.userName}}</h6>
+            <p class="card-text"><b>Descripción: </b>{{publication.description}}</p>  
             <a href="{{publication.file}}" target="_blank">{{publication.fileName}}</a>
           </div>
-          
+          <div *ngIf="publication.image.length!=0" style="position: relative; z-index:1">
             <carousel *ngIf="publication.image != undefined">
-              <div class="carousel-cell" *ngFor="let image of publication.image">
+              <div class="carousel-cell" *ngFor="let image of publication.image"  style="text-align: center; ">
                   <img [src]="image">
               </div>
           </carousel>
+          </div>
+            
           <div *ngIf="publication.videoURL != ''" >
             <div  id="{{publication.id+2}}" class="publication-description">
                 <div size="2" *ngIf="!this.idsarray.includes(publication.id+2)">
-                  <strong>Existe un video. Reprodúcelo</strong>
+                  <strong class="space">Existe un video. Reprodúcelo</strong>
                   <mat-icon (click)="getSafeUrl(publication.videoURL, publication.id+2)" name="play-circle-outline" color="success"  >play_circle_filled</mat-icon>
                 </div>
             </div>
           </div>
-          <div class="card-body " style="text-align: end;"><span>
-          <button (click)="deletePublication(publication)" type="button" class="btn btn-danger" >
+          <div class="card-body " style="text-align: end; position: relative;"><span>
+          <button  (click)="alert(publication)" type="button" class="btn btn-danger" >
            <mat-icon>delete_sweep</mat-icon> Borrar
           </button>
         </span>

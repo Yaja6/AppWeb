@@ -7,17 +7,39 @@
           <div class="col" style="background-color:rgb(159, 231, 207);">
             <h1 class="display-4">¡Bienvenido!</h1>
             <h3>Registra un usuario administrador</h3>
-            <form>
+            <form [formGroup]="contactForm" (ngSubmit)="onSaveForm()">
                 <div class="mb-3">
                   <label for="exampleInputEmail1" class="form-label">Correo electrónico</label>
-                  <input type="email" [(ngModel)]="user.email" class="form-control" name="email" >
+                  <input [(ngModel)]="user.email" type="text" formControlName="email" placeholder="ejemplo@email.com" class="form-control">
+          
+                  <div class="alert-danger" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+                    <div class="container-error-message" *ngIf="email.errors.required">
+                      Email requerido
+                    </div>
+                    <div class="container-error-message" *ngIf="email.errors.minlength">
+                      El correo electrónico debe tener al menos 5 caracteres.
+                    </div>
+                    <div class="container-error-message"
+                      *ngIf="(email.dirty || email.touched) && email.invalid && email.errors.pattern">
+                      El valor debe ser una dirección de correo electrónico válida.
+                    </div>
+                  </div>
                 </div>
                 <div class="mb-3">
                   <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-                  <input type="password" [(ngModel)]="user.password" class="form-control" name="password" >
+                  <input [(ngModel)]="user.password" formControlName="password" placeholder="123456" class="form-control">
+                  <div class="alert-danger" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+                    <div class="container-error-message" *ngIf="password.errors.required">
+                      Contraseña requerida
+                    </div>
+                    <div class="container-error-message" *ngIf="password.errors.minlength">
+                      La contraseña debe tener al menos 6 caracteres.
+                    </div>
+                  </div>
                 </div>
-                <button (click)="onRegister()" class="btn btn-dark" style="width: 100%;">Registrar</button>
+                <button type="submit" class="btn-send" [disabled]="!contactForm.valid" class="btn btn-dark" style="width: 100%;">Registrar</button>
             </form>
+
             <table class="table table-success table-striped">
               <thead>
                 <tr>

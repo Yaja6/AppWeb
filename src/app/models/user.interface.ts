@@ -5,4 +5,5 @@ export interface UserInterface{
     password: string;
     rol: string;
     photo?: string;
+    description?:string;
 }

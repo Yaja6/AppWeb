@@ -16,6 +16,7 @@ export class ReportsComponent implements OnInit {
   currentUser = 'Admin';
   estado = false;
   message = '';
+  message1 = '';
   reports = true;
   publications: PublicationInterface[] = [];
   publicationReported: PublicationInterface = {
@@ -49,6 +50,7 @@ export class ReportsComponent implements OnInit {
     if(res.length === 0){
       this.reports = false;
       this.message = 'No existen publicaciones reportadas';
+      this.message1 = 'No existen publicaciones solucionadas';
     }
     console.log('reportados', res);
    });

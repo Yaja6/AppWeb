@@ -3,6 +3,8 @@ import { PublicationInterface } from 'src/app/models/publication.interface';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { MyAlertDialogComponent } from '../../../app/my-alert-dialog/my-alert-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 @Component({
   selector: 'app-publications',
   templateUrl: './publications.component.html',
@@ -30,7 +32,8 @@ export class PublicationsComponent implements OnInit {
   publications: PublicationInterface[]=[];
   constructor(
     public firestoreService: FirestoreService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -52,6 +55,18 @@ export class PublicationsComponent implements OnInit {
     console.log('Borrado');
   }
 
+  alert(idea: PublicationInterface) {
+    let dialogRef = this.dialog.open(MyAlertDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      // NOTE: The result can also be nothing if the user presses the `esc` key or clicks outside the dialog
+      if (result == 'confirm') {
+        this.firestoreService.deleteDoc(this.path, idea.id);
+        console.log('Borrado');
+      }
+    })
+  }
+
+  
   getSafeUrl(url:any, id:any){
     this.idcomp = id;
     this.idsarray.push(id);
